@@ -162,12 +162,14 @@ def _interactive():
     password = input("Password: ")    
 
     location, cookies, courses = _grades(username, password)
-
+    grade = 0
     print()
+    for course in courses:
+        grade += 'EDCBA'.index(course.grades["cumulative"]["letter"])
     for course in courses:
         print(overview_template % (course.name,
                                    course.grades["cumulative"]["percentage"],
                                    course.grades["cumulative"]["letter"],
                                    course.date))
-    
+    print(grade/len(courses))
 _interactive()
